@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <style>
+        .forms{
+            width:60%;
+            height:100%;
+            margin: auto;
+            margin-top: 100px;
+            border-radius: 10px;
+            border: 2px solid  rgba(125, 125, 129, 0.774);
+        padding: 50px;
+        }
+        .form-control{
+            width:100%;
+            margin:auto!important;
+            margin-top: 15px!important;
+            outline: none!important;
+            border-radius: 10px;
+            height:50px;
+            border: 2px solid grey;
+        }
+        .error{
+color:rgb(252, 164, 164);
+display:block;
+        }
+        h6{
+            display: none;
+        }
+        body{
+            text-emphasis: none;
+            text-align: center;
+            text-shadow: rgb(242, 245, 107);
+            background-color: rgb(171, 229, 247);
+        }
+    </style>
+    <script>
+        function validate(){
+            var username=document.getElementById('username').value;
+            var password=document.getElementById('pwd').value;
+            var confirmpwd=document.getElementById('confirmpwd').value;
+            var email=document.getElementById('email').value;
+            var matchemail=email.substr(email.indexOf('@'));
+            
+            var username_match=/^[A-Za-z]{4,30}$/g;
+            var arr=new Array(3);
+            arr[0]="@hotmail.com";
+            arr[1]="@outlook.com";
+            arr[2]="@gmail.com";
+            
+            var pwd=/^[a-zA-Z0-9]{8,16}$/g;
+            if(!username.match(username_match)){
+               
+            document.getElementsByTagName('h6')[0].classList.add('error');
+            return false;
+            }
+            var flag=0;
+            document.getElementsByTagName('h6')[0].classList.remove('error');
+            for(i=0;i<3;i++){
+            if(matchemail==arr[i]){
+           flag=1;
+            }
+            }
+            if(flag!=1){
+                
+            document.getElementsByTagName('h6')[1].classList.add('error');
+            return false;
+            }
+            document.getElementsByTagName('h6')[1].classList.remove('error');
+            if(!password.match(pwd)){
+                
+            document.getElementsByTagName('h6')[2].classList.add('error');
+            return false;
+            }
+            document.getElementsByTagName('h6')[2].classList.remove('error');
+            if(password!=confirmpwd)
+            {
+            document.getElementsByTagName('h6')[3].classList.add('error'); 
+            return false;
+            }
+            document.getElementsByTagName('h6')[3].classList.remove('error');
+            return true;
+        }
+    </script>
+    <body>
+        <div class="forms">
+            <form id='myform' name="my" onsubmit="return validate();">
+                <input type="text" id="username" placeholder="username" class="form-control"><h6>username should only containt alphates,spaces and _ only and 4-30 charecters.</h6>
+                <input type="email" id="email" placeholder="email" class="form-control"><h6>enter a valid email(outlook,gmail or hotmail)</h6>
+                <input type="password" id="pwd" placeholder="Password" class="form-control"><h6>password should only containt alphates,numbers only and 8-16 charecters.</h6>
+                <input type="password" id="confirmpwd" placeholder="Confirm Password" class="form-control"><h6>password did not match</h6>
+                <input type="submit" id="submit" class="form-control">
+            </form>
+        </div>
+    </body>
+</html>
